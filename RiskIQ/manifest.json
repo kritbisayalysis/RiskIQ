@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "RiskIQ",
+  "version": "1.0.0",
+  "description": "Smart position sizing and risk management calculator for traders.",
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

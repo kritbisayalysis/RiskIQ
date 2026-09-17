@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RiskIQ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+    <header>
+
+        <div class="logo-area">
+
+            <div class="logo-mark">R</div>
+
+            <div>
+                <div class="logo">
+                    Risk<span>IQ</span>
+                </div>
+
+                <div class="tagline">
+                    Know Your Risk. Trade Your Edge.
+                </div>
+            </div>
+
+        </div>
+
+        <div class="header-status">
+            <span class="status-dot"></span>
+            READY
+        </div>
+
+    </header>
+
+
+    <!-- MODE -->
+    <div class="mode-switch">
+
+        <button
+            id="quickMode"
+            class="mode-btn selected"
+            type="button"
+        >
+            QUICK
+        </button>
+
+        <button
+            id="customMode"
+            class="mode-btn"
+            type="button"
+        >
+            CUSTOM
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         ACCOUNT
+    ========================== -->
+
+    <section class="card">
+
+        <div class="section-heading">
+
+            <div class="section-title">
+                ACCOUNT
+            </div>
+
+            <div class="section-number">
+                01
+            </div>
+
+        </div>
+
+
+        <label>
+            Account Balance
+        </label>
+
+        <div class="money-input">
+
+            <span>$</span>
+
+            <input
+                id="balance"
+                type="number"
+                min="0"
+                step="0.01"
+                value="25000"
+            >
+
+        </div>
+
+
+        <label>
+            Risk
+        </label>
+
+        <div class="risk-row">
+
+            <div class="money-input">
+
+                <span id="riskPrefix">%</span>
+
+                <input
+                    id="riskInput"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value="1"
+                >
+
+            </div>
+
+            <div class="risk-buttons">
+
+                <button
+                    id="percentMode"
+                    class="selected"
+                    type="button"
+                >
+                    %
+                </button>
+
+                <button
+                    id="dollarMode"
+                    type="button"
+                >
+                    $
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="risk-summary">
+
+            <span>
+                Target Risk
+            </span>
+
+            <strong id="targetRisk">
+                $250.00
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         INSTRUMENT
+    ========================== -->
+
+    <section class="card">
+
+        <div class="section-heading">
+
+            <div class="section-title">
+                INSTRUMENT
+            </div>
+
+            <div class="section-number">
+                02
+            </div>
+
+        </div>
+
+
+        <!-- QUICK -->
+
+        <div id="quickFields">
+
+            <label>
+                Instrument
+            </label>
+
+            <select id="instrument">
+
+                <option value="XAUUSD">
+                    XAUUSD — Gold
+                </option>
+
+                <option value="NAS100">
+                    NAS100
+                </option>
+
+                <option value="US30">
+                    US30
+                </option>
+
+                <option value="SPX500">
+                    SPX500
+                </option>
+
+                <option value="EURUSD">
+                    EURUSD
+                </option>
+
+                <option value="GBPUSD">
+                    GBPUSD
+                </option>
+
+                <option value="USDJPY">
+                    USDJPY
+                </option>
+
+                <option value="BTCUSD">
+                    BTCUSD
+                </option>
+
+                <option value="ETHUSD">
+                    ETHUSD
+                </option>
+
+            </select>
+
+
+            <div class="preset-note">
+
+                <span>●</span>
+
+                RiskIQ preset
+
+            </div>
+
+        </div>
+
+
+        <!-- CUSTOM -->
+
+        <div
+            id="customFields"
+            style="display:none;"
+        >
+
+            <label>
+                Symbol
+            </label>
+
+            <input
+                id="customSymbol"
+                type="text"
+                placeholder="XAUUSD.pro"
+            >
+
+
+            <div class="custom-divider">
+                OR CALIBRATE FROM AN MT5 TRADE
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-icon">
+                    i
+                </div>
+
+                <div>
+
+                    Use a previous trade to teach RiskIQ
+                    your broker's contract value.
+
+                </div>
+
+            </div>
+
+
+            <label>
+                Previous Lot Size
+            </label>
+
+            <input
+                id="calibrationLot"
+                type="number"
+                min="0"
+                step="any"
+                placeholder="Example: 0.34"
+            >
+
+
+            <label>
+                Price Movement
+            </label>
+
+            <input
+                id="calibrationMove"
+                type="number"
+                min="0"
+                step="any"
+                placeholder="Example: 8.284"
+            >
+
+
+            <label>
+                Actual P/L
+            </label>
+
+            <div class="money-input">
+
+                <span>$</span>
+
+                <input
+                    id="calibrationPnL"
+                    type="number"
+                    min="0"
+                    step="any"
+                    placeholder="Example: 253.64"
+                >
+
+            </div>
+
+
+            <button
+                id="calibrateButton"
+                class="calibrate-btn"
+                type="button"
+            >
+                CALIBRATE BROKER
+            </button>
+
+
+            <div
+                id="calibrationResult"
+                class="calibration-result"
+            >
+            </div>
+
+
+            <label>
+                Lot Step
+            </label>
+
+            <input
+                id="customLotStep"
+                type="number"
+                min="0"
+                step="any"
+                value="0.01"
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TRADE SETUP
+    ========================== -->
+
+    <section class="card">
+
+        <div class="section-heading">
+
+            <div class="section-title">
+                TRADE SETUP
+            </div>
+
+            <div class="section-number">
+                03
+            </div>
+
+        </div>
+
+
+        <label>
+            Direction
+        </label>
+
+        <div class="direction">
+
+            <button
+                id="buy"
+                class="selected"
+                type="button"
+            >
+                BUY
+            </button>
+
+            <button
+                id="sell"
+                type="button"
+            >
+                SELL
+            </button>
+
+        </div>
+
+
+        <label>
+            Entry Price
+        </label>
+
+        <input
+            id="entry"
+            type="number"
+            step="any"
+            placeholder="Entry price"
+        >
+
+
+        <label>
+            Stop Loss
+        </label>
+
+        <input
+            id="stop"
+            type="number"
+            step="any"
+            placeholder="Stop loss"
+        >
+
+
+        <label>
+            Take Profit
+        </label>
+
+        <input
+            id="takeProfit"
+            type="number"
+            step="any"
+            placeholder="Take profit"
+        >
+
+
+        <div
+            id="tradeMessage"
+            class="trade-message"
+        >
+        </div>
+
+
+        <!-- OUTCOMES -->
+
+        <div class="outcome-preview">
+
+            <div class="outcome-card loss">
+
+                <div class="outcome-title">
+                    IF STOP LOSS HITS
+                </div>
+
+                <div
+                    id="stopLossResult"
+                    class="outcome-value"
+                >
+                    -$0.00
+                </div>
+
+                <div
+                    id="stopLossDistance"
+                    class="outcome-distance"
+                >
+                    0.00 distance
+                </div>
+
+            </div>
+
+
+            <div class="outcome-card profit">
+
+                <div class="outcome-title">
+                    IF TAKE PROFIT HITS
+                </div>
+
+                <div
+                    id="takeProfitResult"
+                    class="outcome-value"
+                >
+                    +$0.00
+                </div>
+
+                <div
+                    id="takeProfitDistance"
+                    class="outcome-distance"
+                >
+                    0.00 distance
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         RESULT
+    ========================== -->
+
+    <section class="result-card">
+
+        <div class="result-top">
+
+            <div class="result-label">
+                RECOMMENDED LOT SIZE
+            </div>
+
+            <div
+                id="lotSize"
+                class="lot-size"
+            >
+                0.00
+            </div>
+
+            <div class="lots">
+                LOTS
+            </div>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <span>
+                    Target Risk
+                </span>
+
+                <strong id="targetRiskResult">
+                    $0.00
+                </strong>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>
+                    Actual SL Risk
+                </span>
+
+                <strong id="riskAmount">
+                    $0.00
+                </strong>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>
+                    Potential Profit
+                </span>
+
+                <strong id="potentialProfit">
+                    $0.00
+                </strong>
+
+            </div>
+
+
+            <div class="stat">
+
+                <span>
+                    Risk / Reward
+                </span>
+
+                <strong id="rr">
+                    —
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="riskDifference"
+            class="risk-difference"
+        >
+            Enter your trade setup.
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        <span class="footer-dot">
+            ●
+        </span>
+
+        <span>
+            RiskIQ • Trade with discipline.
+        </span>
+
+    </footer>
+
+</div>
+
+
+<script src="popup.js"></script>
+
+</body>
+</html>
